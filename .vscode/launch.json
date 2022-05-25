@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": true,
+      "externalConsole": false,
+      "cwd": "/Users/mickey/Uni/Semester 2/Betriebssysteme & Rechnernetze/Werkstück A - 27.06.2022/Interprozesskommunikation",
+      "program": "/Users/mickey/Uni/Semester 2/Betriebssysteme & Rechnernetze/Werkstück A - 27.06.2022/Interprozesskommunikation/build/Debug/outDebug",
+      "MIMode": "gdb"
+    }
+  ]
+}
