@@ -31,8 +31,14 @@ int main(int argc, char* argv[]) {
         printf("ERROR with Pipe M\n");
     }
 
+    //Report -> Conv.
+    int pipR[2];
+    if (pipe(pipR) == -1){
+        printf("ERROR with Pipe S\n");
+    }
+    
     //Boolscher Wert, Programm weiter fortgeführt werden soll
-    int weiter = 1;
+    int weiter = 3;
 
     //Speicherort für Stat (Ich denke, wir dürfen nicht aus File auslesen wegen den Synchronisationsbedingungen)
     int *speicher = malloc(sizeof(int));
@@ -43,19 +49,29 @@ int main(int argc, char* argv[]) {
     //Variable zum zählen der Schleifen und reservieren des Speicherplatzes
     int Schleifenzahl = 1;
 
+    //Für Conv
+    int anzahlSchleife = 0;
+
     //Erstellen von vier Prozessen
     int id1 = fork();
     int id2 = fork();
 
     
-    //while (weiter == 1){
-    
+    while (1){
+    printf("erste\n");
     //Zugriff auf die einzelnen Prozesse
     if (id1 == 0){
         if (id2 == 0){
             //Conv
+            //close(pipR[1]);
+            
+            int warteR;
            
-            close(pip1[0]);
+            while (anzahlSchleife < 1){
+            printf("Funktioniert\n");
+              
+            //close(pipR[0]);
+               close(pip1[0]);
             close(pip2[0]);
 
             time_t t;
@@ -69,6 +85,13 @@ int main(int argc, char* argv[]) {
             close(pip2[1]);
 
             printf("Zahl: %d\n", zufallszahl);
+
+            anzahlSchleife++;
+            }
+          // }
+
+           
+            
         }else{
             //Log
             
@@ -157,11 +180,13 @@ int main(int argc, char* argv[]) {
 
         printf("Programm weiter ausführen?");
                 scanf("%d", &weiter);
+
+                
     }
     
     }
     Schleifenzahl++;
-    //}
+    }
    free(speicher); 
 return 0;
 }
