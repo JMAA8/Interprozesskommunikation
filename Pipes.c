@@ -31,14 +31,6 @@ int main(int argc, char* argv[]) {
         printf("ERROR with Pipe M\n");
     }
 
-    //Report -> Conv.
-    int pipR[2];
-    if (pipe(pipR) == -1){
-        printf("ERROR with Pipe S\n");
-    }
-    
-    //Boolscher Wert, Programm weiter fortgeführt werden soll
-    int weiter = 3;
 
     //Speicherort für Stat (Ich denke, wir dürfen nicht aus File auslesen wegen den Synchronisationsbedingungen)
     int *speicher = malloc(sizeof(int));
@@ -49,57 +41,63 @@ int main(int argc, char* argv[]) {
     //Variable zum zählen der Schleifen und reservieren des Speicherplatzes
     int Schleifenzahl = 1;
 
-    //Für Conv
-    int anzahlSchleife = 0;
+    //Summe Mittelwert
+    int Summe2 = 0;
+    int Mittelwert2 = 0;
 
     //Erstellen von vier Prozessen
     int id1 = fork();
     int id2 = fork();
 
     
-    while (1){
-    printf("erste\n");
+   printf("%d\n", id1);
+   printf("%d\n", id2);
+
+   
+    
     //Zugriff auf die einzelnen Prozesse
     if (id1 == 0){
         if (id2 == 0){
             //Conv
-            //close(pipR[1]);
-            
-            int warteR;
-           
-            while (anzahlSchleife < 1){
-            printf("Funktioniert\n");
-              
-            //close(pipR[0]);
-               close(pip1[0]);
+            close(pipS[0]);
+            close(pipM[0]);
+            close(pipS[1]);
+            close(pipM[1]);
+            close(pip1[0]);
             close(pip2[0]);
+
+            while(Schleifenzahl<5){
+           
 
             time_t t;
             srand(time (&t));
             int zufallszahl = rand();
         
             write(pip1[1], &zufallszahl, sizeof(int));
-            close(pip1[1]);
-
+            
             write(pip2[1], &zufallszahl, sizeof(int));
-            close(pip2[1]);
+            
 
             printf("Zahl: %d\n", zufallszahl);
 
-            anzahlSchleife++;
+            sleep(1);
+            Schleifenzahl++;
             }
-          // }
-
-           
-            
         }else{
             //Log
+            close(pipS[0]);
+            close(pipM[0]);
+            close(pipS[1]);
+            close(pipM[1]);
+            close(pip2[0]);
+            close(pip2[1]);    
             
-            wait(NULL);
             close(pip1[1]);
+            while(Schleifenzahl<5){
+            
             int y;
             read(pip1[0], &y, sizeof(int));
-            close(pip1[0]);
+            //printf("Schreibe File %d\n", y);
 
             FILE *ed;
             ed = fopen("Zufallszahlen", "a");
@@ -110,20 +108,33 @@ int main(int argc, char* argv[]) {
             }
 
 
-            printf("Es hat funktioniert: %d\n", y);
+            //printf("Es hat funktioniert: %d\n", y);
+            
+            Schleifenzahl++;
+        }
         }
         
     }else{
         if (id2 == 0){
             //Stat
-
-            wait(NULL);
-
+            close(pipS[0]);
+            close(pipM[0]);
+            close(pip1[0]);
+            close(pip1[1]); 
             close(pip2[1]);
+            while(Schleifenzahl<5){
+            
+
             int zVonConv;
             read(pip2[0], &zVonConv, sizeof(int));
-            close(pip2[0]);
-            if(Schleifenzahl == 1){
+
+            Summe2 += zVonConv;
+            Mittelwert2 = Summe2 / Schleifenzahl;
+
+            printf("Summe aus Weg 2: %d\n", Summe2);
+            printf("Mittelwert aus Weg 2: %d\n", Mittelwert2);
+            
+           /* if(Schleifenzahl == 1){
                 
                *speicher = zVonConv; 
             }else{
@@ -136,57 +147,47 @@ int main(int argc, char* argv[]) {
             for (int x = 0; x<sizeof(speicher); x++){
                 Summe += speicher[x];
             }
-            Mittelwert = Summe / Schleifenzahl;
+            Mittelwert = Summe / Schleifenzahl; */
 
-            int Summe2 = 0;
-            int Mittelwert2 = 0;
+            write(pipS[1], &Summe2, sizeof(int));
+            write(pipM[1], &Mittelwert2, sizeof(int));
 
-            Summe2 += zVonConv;
-            Mittelwert2 = Summe2 / Schleifenzahl;
+            printf("Kontrolle: %d\n", Summe2);
 
-            printf("Summe aus Weg 2: %d\n", Summe2);
-            printf("Mittelwert aus Weg 2: %d\n", Mittelwert2);
+            Schleifenzahl++;
+            }
 
-            close(pipS[0]);
-            close(pipM[0]);
-
-            write(pipS[1], &Summe, sizeof(int));
-            close(pipS[1]);
-
-            write(pipM[1], &Mittelwert, sizeof(int));
-            close(pipM[1]);
-           
         }else{
             //Report
-            while(wait(NULL) != -1 || errno != ECHILD){
-                
-
-        }
-
+        close(pip2[0]);
+        close(pip2[1]); 
+        close(pip1[0]);
+        close(pip1[1]); 
         close(pipS[1]);
         close(pipM[1]);
-
+        while(Schleifenzahl<5){
+        
         int SummeAusS;
         int MittelwertAusS;
 
         read(pipS[0], &SummeAusS, sizeof(int));
-            close(pipS[0]);
+            
 
         read(pipM[0], &MittelwertAusS, sizeof(int));
-            close(pipM[0]);
+            
 
         printf("Akutelle Summe: %d\n", SummeAusS);
         printf("Aktueller Mittelwert: %d\n", MittelwertAusS);
 
-        printf("Programm weiter ausführen?");
-                scanf("%d", &weiter);
+        Schleifenzahl++;
 
-                
+            }
+
     }
     
     }
-    Schleifenzahl++;
-    }
+    
+    
    free(speicher); 
 return 0;
 }
