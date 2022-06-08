@@ -71,7 +71,7 @@ int main(int argc, char* argv[]) {
 
             time_t t;
             srand(time (&t));
-            int zufallszahl = rand();
+            int zufallszahl = rand()%20;
         
             write(pip1[1], &zufallszahl, sizeof(int));
             
@@ -188,6 +188,6 @@ int main(int argc, char* argv[]) {
     }
     
     
-   free(speicher); 
+  // free(speicher); 
 return 0;
 }
