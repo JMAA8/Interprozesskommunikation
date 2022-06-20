@@ -71,7 +71,7 @@ int main(int argc, char* argv[]) {
 
             time_t t;
             srand(time (&t));
-            int zufallszahl = rand()%20;
+            int zufallszahl = rand()%101;
         
             write(pip1[1], &zufallszahl, sizeof(int));
             
