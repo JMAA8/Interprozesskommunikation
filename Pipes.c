@@ -33,10 +33,10 @@ int main(int argc, char* argv[]) {
 
 
     //Speicherort für Stat (Ich denke, wir dürfen nicht aus File auslesen wegen den Synchronisationsbedingungen)
-    int *speicher = malloc(sizeof(int));
+   /* int *speicher = malloc(sizeof(int));
                 if (speicher == NULL){
                     return 1;
-                }
+                }*/
 
     //Variable zum zählen der Schleifen und reservieren des Speicherplatzes
     int Schleifenzahl = 1;
@@ -50,8 +50,8 @@ int main(int argc, char* argv[]) {
     int id2 = fork();
 
     
-   printf("%d\n", id1);
-   printf("%d\n", id2);
+  // printf("%d\n", id1);
+  // printf("%d\n", id2);
 
    
     
@@ -81,7 +81,7 @@ int main(int argc, char* argv[]) {
             printf("Zahl: %d\n", zufallszahl);
 
             sleep(1);
-            Schleifenzahl++;
+            //Schleifenzahl++;
             }
         }else{
             //Log
@@ -110,7 +110,7 @@ int main(int argc, char* argv[]) {
 
             //printf("Es hat funktioniert: %d\n", y);
             
-            Schleifenzahl++;
+            //Schleifenzahl++;
         }
         }
         
@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) {
             close(pip1[0]);
             close(pip1[1]); 
             close(pip2[1]);
-            while(Schleifenzahl<5){
+            while(1){
             
 
             int zVonConv;
@@ -165,7 +165,7 @@ int main(int argc, char* argv[]) {
         close(pip1[1]); 
         close(pipS[1]);
         close(pipM[1]);
-        while(Schleifenzahl<5){
+        while(1){
         
         int SummeAusS;
         int MittelwertAusS;
@@ -179,7 +179,7 @@ int main(int argc, char* argv[]) {
         printf("Akutelle Summe: %d\n", SummeAusS);
         printf("Aktueller Mittelwert: %d\n", MittelwertAusS);
 
-        Schleifenzahl++;
+        //Schleifenzahl++;
 
             }
 
