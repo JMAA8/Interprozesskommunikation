@@ -66,7 +66,7 @@ int main(int argc, char* argv[]) {
             close(pip1[0]);
             close(pip2[0]);
 
-            while(Schleifenzahl<5){
+            while(1){
            
 
             time_t t;
@@ -93,7 +93,7 @@ int main(int argc, char* argv[]) {
             close(pip2[1]);    
             
             close(pip1[1]);
-            while(Schleifenzahl<5){
+            while(1){
             
             int y;
             read(pip1[0], &y, sizeof(int));
