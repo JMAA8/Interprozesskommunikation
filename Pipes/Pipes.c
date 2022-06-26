@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
     }
 
 
-    //Speicherort für Stat (Ich denke, wir dürfen nicht aus File auslesen wegen den Synchronisationsbedingungen)
+    //Speicherort für Stat 
    /* int *speicher = malloc(sizeof(int));
                 if (speicher == NULL){
                     return 1;
