@@ -58,14 +58,14 @@ int main(int argc, char const *argv[])
 
             while (1)
             {
-                //printf("Conv startet \n");
+                // printf("Conv startet \n");
                 int zufallszahl = 0;
                 time_t t;
                 srand(time(&t));
                 zufallszahl = rand() % 101;
 
                 // Zahl ausgabe
-                printf("Zahl: %d \n", zufallszahl);
+                // printf("Zahl: %d \n", zufallszahl);
 
                 // Zahl in sendebuffer speichern
                 sendebuffer.Zahl = zufallszahl;
