@@ -11,7 +11,7 @@
 
 typedef struct msgbuf
 {
-    long mtype;
+    int mtype;
     int Zahl;
 } msg;
 
