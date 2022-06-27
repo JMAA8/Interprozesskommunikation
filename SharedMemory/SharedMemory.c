@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf("Das Segment wurde erstellt.\n");
+        // printf("Das Segment wurde erstellt.\n");
     }
 
     // Gemeinsames Speichersegment anhängen
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf("Das Segment wurde angehängt.\n");
+        // printf("Das Segment wurde angehängt.\n");
     }
 
     // Conv - Stat
@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf("Das Segment wurde erstellt.\n");
+        // printf("Das Segment wurde erstellt.\n");
     }
 
     // Gemeinsames Speichersegment anhängen
@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf("Das Segment wurde angehängt.\n");
+        // printf("Das Segment wurde angehängt.\n");
     }
 
     // Stat - Report: Summe
@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf("Das Segment wurde erstellt.\n");
+        // printf("Das Segment wurde erstellt.\n");
     }
 
     // Gemeinsames Speichersegment anhängen
@@ -137,7 +137,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf("Das Segment wurde angehängt.\n");
+        // printf("Das Segment wurde angehängt.\n");
     }
 
     // Stat - Report: Mittelwert
@@ -163,7 +163,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf("Das Segment wurde erstellt.\n");
+        // printf("Das Segment wurde erstellt.\n");
     }
 
     // Gemeinsames Speichersegment anhängen
@@ -176,7 +176,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf("Das Segment wurde angehängt.\n");
+        // printf("Das Segment wurde angehängt.\n");
     }
 
     // Erstellen von Semaphorpaaren
@@ -224,13 +224,13 @@ int main(int argc, char *argv[])
     // Erste Semaphore der Semaphorgruppe 54321 initial auf Wert 0 setzen
     ConvLog_semctl = semctl(ConvLog_semget2, 0, SETVAL, 0);
 
-    // Initialen Wert der ersten Semaphore der Semaphorgruppe 12345 zur Kontrolle ausgeben
-    output = semctl(ConvLog_semget1, 0, GETVAL, 0);
-    printf("Wert der Semaphore mit ID %i und Key %i: %i\n", ConvLog_semget1, ConvLog_key1, output);
+    // // Initialen Wert der ersten Semaphore der Semaphorgruppe 12345 zur Kontrolle ausgeben
+    // output = semctl(ConvLog_semget1, 0, GETVAL, 0);
+    // printf("Wert der Semaphore mit ID %i und Key %i: %i\n", ConvLog_semget1, ConvLog_key1, output);
 
-    // Initialen Wert der ersten Semaphore der Semaphorgruppe 54321 zur Kontrolle ausgeben
-    output = semctl(ConvLog_semget2, 0, GETVAL, 0);
-    printf("Wert der Semaphore mit ID %i und Key %i: %i\n", ConvLog_semget2, ConvLog_key2, output);
+    // // Initialen Wert der ersten Semaphore der Semaphorgruppe 54321 zur Kontrolle ausgeben
+    // output = semctl(ConvLog_semget2, 0, GETVAL, 0);
+    // printf("Wert der Semaphore mit ID %i und Key %i: %i\n", ConvLog_semget2, ConvLog_key2, output);
 
     // Conv & Stat
 
@@ -269,13 +269,13 @@ int main(int argc, char *argv[])
     // Erste Semaphore der Semaphorgruppe 543210 initial auf Wert 0 setzen
     ConvStat_semctl = semctl(ConvStat_semget2, 0, SETVAL, 0);
 
-    // Initialen Wert der ersten Semaphore der Semaphorgruppe 12345 zur Kontrolle ausgeben
-    ConvStatoutput = semctl(ConvStat_semget1, 0, GETVAL, 0);
-    printf("Wert der Semaphore mit ID %i und Key %i: %i\n", ConvStat_semget1, ConvStat_key1, ConvStatoutput);
+    // // Initialen Wert der ersten Semaphore der Semaphorgruppe 12345 zur Kontrolle ausgeben
+    // ConvStatoutput = semctl(ConvStat_semget1, 0, GETVAL, 0);
+    // printf("Wert der Semaphore mit ID %i und Key %i: %i\n", ConvStat_semget1, ConvStat_key1, ConvStatoutput);
 
-    // Initialen Wert der ersten Semaphore der Semaphorgruppe 54321 zur Kontrolle ausgeben
-    ConvStatoutput = semctl(ConvStat_semget2, 0, GETVAL, 0);
-    printf("Wert der Semaphore mit ID %i und Key %i: %i\n", ConvStat_semget2, ConvStat_key2, ConvStatoutput);
+    // // Initialen Wert der ersten Semaphore der Semaphorgruppe 54321 zur Kontrolle ausgeben
+    // ConvStatoutput = semctl(ConvStat_semget2, 0, GETVAL, 0);
+    // printf("Wert der Semaphore mit ID %i und Key %i: %i\n", ConvStat_semget2, ConvStat_key2, ConvStatoutput);
 
     // Stat & Report
 
@@ -314,13 +314,13 @@ int main(int argc, char *argv[])
     // Erste Semaphore der Semaphorgruppe 54321 initial auf Wert 0 setzen
     StatReport_semctl = semctl(StatReport_semget2, 0, SETVAL, 0);
 
-    // Initialen Wert der ersten Semaphore der Semaphorgruppe 12345 zur Kontrolle ausgeben
-    StatReportoutput = semctl(StatReport_semget1, 0, GETVAL, 0);
-    printf("Wert der Semaphore mit ID %i und Key %i: %i\n", StatReport_semget1, StatReport_key1, StatReportoutput);
+    // // Initialen Wert der ersten Semaphore der Semaphorgruppe 12345 zur Kontrolle ausgeben
+    // StatReportoutput = semctl(StatReport_semget1, 0, GETVAL, 0);
+    // printf("Wert der Semaphore mit ID %i und Key %i: %i\n", StatReport_semget1, StatReport_key1, StatReportoutput);
 
-    // Initialen Wert der ersten Semaphore der Semaphorgruppe 54321 zur Kontrolle ausgeben
-    StatReportoutput = semctl(StatReport_semget2, 0, GETVAL, 0);
-    printf("Wert der Semaphore mit ID %i und Key %i: %i\n", StatReport_semget2, StatReport_key2, StatReportoutput);
+    // // Initialen Wert der ersten Semaphore der Semaphorgruppe 54321 zur Kontrolle ausgeben
+    // StatReportoutput = semctl(StatReport_semget2, 0, GETVAL, 0);
+    // printf("Wert der Semaphore mit ID %i und Key %i: %i\n", StatReport_semget2, StatReport_key2, StatReportoutput);
 
     // Variable zum zählen der Schleifen
     int Schleifenzahl = 1;
@@ -329,16 +329,12 @@ int main(int argc, char *argv[])
     int Summe2 = 0;
     int Mittelwert2 = 0;
 
-    int SemaphoreValue;
-    SemaphoreValue = semctl(StatReport_semget2, 0, GETVAL, 0);
-    printf("SemaphoreValue StatReport2 in Init: %d\n", SemaphoreValue);
-
-    // Erstellen von vier Prozessen
+        // Erstellen von vier Prozessen
     int id1 = fork();
     int id2 = fork();
 
-    printf("Fork1: %d\n", id1);
-    printf("Fork2: %d\n", id2);
+    // printf("Fork1: %d\n", id1);
+    // printf("Fork2: %d\n", id2);
 
     // Zugriff auf die einzelnen Prozesse
     if (id1 == 0)
@@ -360,7 +356,7 @@ int main(int argc, char *argv[])
                 srand(time(&t));
                 int zufallszahl = rand() % 101;
 
-                printf("Zufallszahl aus Conv: %d\n", zufallszahl);
+                // printf("Zufallszahl aus Conv: %d\n", zufallszahl);
 
                 ConvLog_sprintf = sprintf(ConvLogpointer, "%d", zufallszahl);
                 if (ConvLog_sprintf < 0)
@@ -400,7 +396,7 @@ int main(int argc, char *argv[])
                 semop(ConvLog_semget2, &p_operation, 1);
 
                 FILE *ed;
-                ed = fopen("Zufallszahlen", "a");
+                ed = fopen("ZufallszahlenSharedMemory", "a");
                 if (ed == 0)
                 {
                     printf("Datei kann nicht geöffnet werden!");

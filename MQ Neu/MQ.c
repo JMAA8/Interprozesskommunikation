@@ -58,7 +58,7 @@ int main(int argc, char const *argv[])
 
             while (1)
             {
-                printf("Conv startet \n");
+                //printf("Conv startet \n");
                 int zufallszahl = 0;
                 time_t t;
                 srand(time(&t));
@@ -77,7 +77,7 @@ int main(int argc, char const *argv[])
                 }
                 else
                 {
-                    printf("Geschickte Zahl an Log: %d\n", sendebuffer.Zahl);
+                    // printf("Geschickte Zahl an Log: %d\n", sendebuffer.Zahl);
                 }
                 // Con -> Stat
                 if (msgsnd(rc_msgget2, &sendebuffer, sizeof(sendebuffer.Zahl), 0) == -1)
@@ -86,9 +86,9 @@ int main(int argc, char const *argv[])
                 }
                 else
                 {
-                    printf("Geschickte Zahl an Stat: %d\n", sendebuffer.Zahl);
+                    // printf("Geschickte Zahl an Stat: %d\n", sendebuffer.Zahl);
                 }
-                sleep(3);
+                sleep(1);
             }
         }
         else
@@ -105,7 +105,7 @@ int main(int argc, char const *argv[])
 
                 // Empfangen der Zahl
                 msgrcv(rc_msgget1, &recievebuffer, sizeof(recievebuffer.Zahl), 0, 0);
-                printf("Erhaltene Zahl von Conv an Log: %d \n", recievebuffer.Zahl);
+                // printf("Erhaltene Zahl von Conv an Log: %d \n", recievebuffer.Zahl);
 
                 // Zahl in Variable speichern
                 int Zahl = 0;
@@ -113,7 +113,7 @@ int main(int argc, char const *argv[])
 
                 // Zahl in Dokument schreiben
                 FILE *ed;
-                ed = fopen("Zufallszahlen", "a");
+                ed = fopen("ZufallszahlenMessageQueues", "a");
                 if (ed == 0)
                 {
                     printf("Datei kann nicht geöffnet werden! \n");
@@ -140,7 +140,7 @@ int main(int argc, char const *argv[])
                 }
                 // Zahl Empfangen
                 msgrcv(rc_msgget2, &recievebuffer, sizeof(recievebuffer.Zahl), 0, 0);
-                printf("Erhaltene Zahl von Conv an Stat: %d \n", recievebuffer.Zahl);
+                // printf("Erhaltene Zahl von Conv an Stat: %d \n", recievebuffer.Zahl);
 
                 // Zahl in Variable speichern
                 int StatZahl = 0;
@@ -161,7 +161,7 @@ int main(int argc, char const *argv[])
                 }
                 else
                 {
-                    printf("Geschickte Zahl (Summe) an Report: %d\n", sendebuffer.Zahl);
+                    // printf("Geschickte Zahl (Summe) an Report: %d\n", sendebuffer.Zahl);
                 }
 
                 // Mittelwert -> Report schicken
@@ -172,7 +172,7 @@ int main(int argc, char const *argv[])
                 }
                 else
                 {
-                    printf("Geschickte Zahl (Mittelwert) an Report: %d\n", sendebuffer.Zahl);
+                    // printf("Geschickte Zahl (Mittelwert) an Report: %d\n", sendebuffer.Zahl);
                 }
             }
         }
@@ -190,14 +190,14 @@ int main(int argc, char const *argv[])
                 // Summe empfangen
                 msgrcv(rc_msgget3, &recievebuffer, sizeof(recievebuffer.Zahl), 0, 0);
 
-                printf("Erhaltene Summe von Stat: %d \n", recievebuffer.Zahl);
+                // printf("Erhaltene Summe von Stat: %d \n", recievebuffer.Zahl);
                 int SummeEmpfang;
                 SummeEmpfang = recievebuffer.Zahl;
 
                 // Mittwert empfangen
                 int MittelwertEmpfang;
                 msgrcv(rc_msgget4, &recievebuffer, sizeof(recievebuffer.Zahl), 0, 0);
-                printf("Erhaltener Mittelwert von Stat: %d \n", recievebuffer.Zahl);
+                // printf("Erhaltener Mittelwert von Stat: %d \n", recievebuffer.Zahl);
 
                 MittelwertEmpfang = recievebuffer.Zahl;
 

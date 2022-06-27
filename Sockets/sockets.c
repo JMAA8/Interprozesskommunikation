@@ -95,7 +95,7 @@ if (id1 == 0){
                 
 
                 FILE *ed;
-                ed = fopen("Zufall", "a");
+                ed = fopen("ZufallSockets", "a");
                 if(ed == 0){
                 printf("Datei kann nicht geöffnet werden!");
                 }else{
