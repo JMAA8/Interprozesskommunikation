@@ -41,10 +41,11 @@ int main(int argc, char const *argv[])
 
     msg sendebuffer, recievebuffer; // Empfang und Sendepuffer
 
-    rc_msgget1 = msgget(mq_key1, IPC_CREAT | 0600);
-    rc_msgget2 = msgget(mq_key2, IPC_CREAT | 0600);
-    rc_msgget3 = msgget(mq_key3, IPC_CREAT | 0600);
-    rc_msgget4 = msgget(mq_key3, IPC_CREAT | 0600);
+    rc_msgget1 = msgget(mq_key1, IPC_CREAT);
+    rc_msgget2 = msgget(mq_key2, IPC_CREAT);
+    rc_msgget3 = msgget(mq_key3, IPC_CREAT);
+    rc_msgget4 = msgget(mq_key3, IPC_CREAT);
+    
     sendebuffer.mtype = 1;
 
     int id1 = fork();
