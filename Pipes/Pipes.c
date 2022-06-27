@@ -115,6 +115,7 @@ int main(int argc, char *argv[])
                     fprintf(ed, "%d\n", y);
                 }
 
+                fclose(ed);
                 // printf("Es hat funktioniert: %d\n", y);
 
                 // Schleifenzahl++;
