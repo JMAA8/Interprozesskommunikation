@@ -16,62 +16,64 @@
 
 #include <signal.h>
 
-
-
 #define MAXMEMSIZE 20
 #define SEM_Producer_FNAME
 #define SEM_Consumer_FNAME
 
-#define errExit(msg) do { perror(msg); exit(EXIT_FAILURE); \
-                               } while (0)
+#define errExit(msg)        \
+    do                      \
+    {                       \
+        perror(msg);        \
+        exit(EXIT_FAILURE); \
+    } while (0)
 
 static void sigintHandler(int sig)
 {
 
-    //Shared Memory Löschen
-   
-   int a = shmctl(12345893, IPC_RMID, NULL);
+    // Shared Memory Löschen
 
-   if (a < 0)
-    {
-        printf("Hat nicht geklappt\n"); 
-        
-    }
-    shmctl(678902435, IPC_RMID, NULL);
-    shmctl(1246863649, IPC_RMID, NULL);
-    shmctl(13579843, IPC_RMID, NULL);
+    int ConvLog_shmget = shmget(12345893, MAXMEMSIZE, IPC_CREAT | 0600);
 
-    //Semaphoren löschen
-    int  sm1 = semget(123450234, 1, IPC_STAT);
+    shmctl(ConvLog_shmget, IPC_RMID, NULL);
+
+    int ConStat_shmget = shmget(678902435, MAXMEMSIZE, IPC_CREAT | 0600);
+
+    shmctl(ConStat_shmget, IPC_RMID, NULL);
+
+    int StatS_shmget = shmget(1246863649, MAXMEMSIZE, IPC_CREAT | 0600);
+    shmctl(StatS_shmget, IPC_RMID, NULL);
+
+    int StatM_shmget = shmget(13579843, MAXMEMSIZE, IPC_CREAT | 0600);
+    shmctl(StatM_shmget, IPC_RMID, NULL);
+
+    // Semaphoren löschen
+    int sm1 = semget(123450234, 1, IPC_STAT);
     semctl(sm1, 1, IPC_RMID);
 
-    int  sm2 = semget(432134611, 1, IPC_STAT);
+    int sm2 = semget(432134611, 1, IPC_STAT);
     semctl(sm2, 1, IPC_RMID);
 
-    int  sm3 = semget(123459355, 1, IPC_STAT);
+    int sm3 = semget(123459355, 1, IPC_STAT);
     semctl(sm3, 1, IPC_RMID);
 
-    int  sm4 = semget(432109984, 1, IPC_STAT);
+    int sm4 = semget(432109984, 1, IPC_STAT);
     semctl(sm4, 1, IPC_RMID);
 
-    int  sm5 = semget(345232100, 1, IPC_STAT);
+    int sm5 = semget(345232100, 1, IPC_STAT);
     semctl(sm5, 1, IPC_RMID);
 
-    int  sm6 = semget(238123882, 1, IPC_STAT);
+    int sm6 = semget(238123882, 1, IPC_STAT);
     semctl(sm6, 1, IPC_RMID);
 
-
-    write(STDERR_FILENO, "Programm beendet\n", 20);
+    write(STDERR_FILENO, "Prozess beendet\n", 20);
     exit(EXIT_SUCCESS);
 }
 
 int main(int argc, char *argv[])
 {
 
-
-if (signal(SIGINT, sigintHandler) == SIG_ERR)
+    if (signal(SIGINT, sigintHandler) == SIG_ERR)
         errExit("signal SIGINT");
-
 
     // Shared Memory
 
@@ -381,7 +383,7 @@ if (signal(SIGINT, sigintHandler) == SIG_ERR)
     int Summe2 = 0;
     int Mittelwert2 = 0;
 
-        // Erstellen von vier Prozessen
+    // Erstellen von vier Prozessen
     int id1 = fork();
     int id2 = fork();
 
